@@ -2,6 +2,7 @@ package app
 
 import (
 	"main/src/data"
+	"strconv"
 
 	"github.com/twharmon/goui"
 )
@@ -10,6 +11,14 @@ type RowProps struct {
 	Selected bool
 	SetState func(func(*AppState) *AppState)
 	Item     *data.Item
+}
+
+func (p RowProps) Memo() goui.Deps {
+	return goui.Deps{p.Selected, p.Item.Label}
+}
+
+func (p RowProps) Key() string {
+	return strconv.Itoa(p.Item.ID)
 }
 
 func Row(props RowProps) *goui.Node {
