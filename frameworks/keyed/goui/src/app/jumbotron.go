@@ -17,15 +17,13 @@ func (jp JumbotronProps) Memo() goui.Deps {
 func button(id string, txt string, onclick *goui.Callback[func(*goui.MouseEvent)]) *goui.Node {
 	return goui.Element("div", &goui.Attributes{
 		Class: "col-sm-6 smallpad",
-		Children: goui.Children{
-			goui.Element("button", &goui.Attributes{
-				ID:       id,
-				OnClick:  onclick,
-				Type:     "button",
-				Class:    "btn btn-primary btn-block",
-				Children: goui.Children{goui.Text(txt)},
-			}),
-		},
+		Slot: goui.Element("button", &goui.Attributes{
+			ID:      id,
+			OnClick: onclick,
+			Type:    "button",
+			Class:   "btn btn-primary btn-block",
+			Slot:    txt,
+		}),
 	})
 }
 
@@ -89,26 +87,24 @@ func Jumbotron(props JumbotronProps) *goui.Node {
 
 	return goui.Element("div", &goui.Attributes{
 		Class: "jumbotron",
-		Children: goui.Children{
+		Slot: []*goui.Node{
 			goui.Element("div", &goui.Attributes{
 				Class: "row",
-				Children: goui.Children{
+				Slot: []*goui.Node{
 					heading,
 					goui.Element("div", &goui.Attributes{
 						Class: "col-md-6",
-						Children: goui.Children{
-							goui.Element("div", &goui.Attributes{
-								Class: "row",
-								Children: goui.Children{
-									button("run", "Create 1,000 rows", handleCreate1k),
-									button("runlots", "Create 10,000 rows", handleCreate10k),
-									button("add", "Append 1,000 rows", handleAppend1k),
-									button("update", "Update every 10th row", handleUpdateEvery10th),
-									button("clear", "Clear", handleClear),
-									button("swaprows", "Swap rows", handleSwapRows),
-								},
-							}),
-						},
+						Slot: goui.Element("div", &goui.Attributes{
+							Class: "row",
+							Slot: []*goui.Node{
+								button("run", "Create 1,000 rows", handleCreate1k),
+								button("runlots", "Create 10,000 rows", handleCreate10k),
+								button("add", "Append 1,000 rows", handleAppend1k),
+								button("update", "Update every 10th row", handleUpdateEvery10th),
+								button("clear", "Clear", handleClear),
+								button("swaprows", "Swap rows", handleSwapRows),
+							},
+						}),
 					}),
 				},
 			}),
@@ -118,7 +114,5 @@ func Jumbotron(props JumbotronProps) *goui.Node {
 
 var heading = goui.Element("div", &goui.Attributes{
 	Class: "col-md-6",
-	Children: goui.Children{
-		goui.Element("h1", &goui.Attributes{Children: goui.Children{goui.Text("GoUI")}}),
-	},
+	Slot:  goui.Element("h1", &goui.Attributes{Slot: "GoUI"}),
 })

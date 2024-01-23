@@ -55,28 +55,24 @@ func Row(props RowProps) *goui.Node {
 
 	return goui.Element("tr", &goui.Attributes{
 		Class: trClass,
-		Children: goui.Children{
+		Slot: []*goui.Node{
 			goui.Element("td", &goui.Attributes{
-				Class:    "col-md-1",
-				Children: goui.Children{goui.Text(strconv.Itoa(id))},
+				Class: "col-md-1",
+				Slot:  id,
 			}),
 			goui.Element("td", &goui.Attributes{
 				Class: "col-md-4",
-				Children: goui.Children{
-					goui.Element("a", &goui.Attributes{
-						OnClick:  handleSelect,
-						Children: goui.Children{goui.Text(props.Item.Label)},
-					}),
-				},
+				Slot: goui.Element("a", &goui.Attributes{
+					OnClick: handleSelect,
+					Slot:    props.Item.Label,
+				}),
 			}),
 			goui.Element("td", &goui.Attributes{
 				Class: "col-md-1",
-				Children: goui.Children{
-					goui.Element("a", &goui.Attributes{
-						OnClick:  handleDelete,
-						Children: trashIcon,
-					}),
-				},
+				Slot: goui.Element("a", &goui.Attributes{
+					OnClick: handleDelete,
+					Slot:    trashIcon,
+				}),
 			}),
 			emptyTd,
 		},
@@ -84,9 +80,7 @@ func Row(props RowProps) *goui.Node {
 }
 
 var emptyTd = goui.Element("td", &goui.Attributes{Class: "col-md-6"})
-var trashIcon = goui.Children{
-	goui.Element("span", &goui.Attributes{
-		Class:      "glyphicon glyphicon-remove",
-		AriaHidden: true,
-	}),
-}
+var trashIcon = goui.Element("span", &goui.Attributes{
+	Class:      "glyphicon glyphicon-remove",
+	AriaHidden: true,
+})

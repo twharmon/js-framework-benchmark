@@ -16,19 +16,19 @@ func App(goui.NoProps) *goui.Node {
 
 	return goui.Element("div", &goui.Attributes{
 		Class: "container",
-		Children: goui.Children{
+		Slot: []*goui.Node{
 			goui.Component(Jumbotron, JumbotronProps{SetState: setState}),
 			goui.Element("table", &goui.Attributes{
 				Class: "table table-hover table-striped test-data",
-				Children: goui.Children{goui.Element("tbody", &goui.Attributes{
-					Children: goui.Map(state.Items, func(item *data.Item) *goui.Node {
+				Slot: goui.Element("tbody", &goui.Attributes{
+					Slot: goui.Map(state.Items, func(item *data.Item) *goui.Node {
 						return goui.Component(Row, RowProps{
 							Selected: item.ID == state.Selected,
 							Item:     item,
 							SetState: setState,
 						})
 					}),
-				})},
+				}),
 			}),
 			preloadIcon,
 		},
