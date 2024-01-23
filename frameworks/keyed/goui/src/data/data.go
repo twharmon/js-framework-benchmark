@@ -4,17 +4,29 @@ import (
 	"math/rand"
 )
 
-var adjectives = []string{"pretty", "large", "big", "small", "tall", "short", "long", "handsome",
+const adjectiveCnt = 25
+const colorCnt = 11
+const nounCnt = 13
+
+var adjectives = [adjectiveCnt]string{"pretty", "large", "big", "small", "tall", "short", "long", "handsome",
 	"plain", "quaint", "clean", "elegant", "easy", "angry", "crazy", "helpful", "mushy",
 	"odd", "unsightly", "adorable", "important", "inexpensive", "cheap", "expensive",
 	"fancy"}
-var colors = []string{"red", "yellow", "blue", "green", "pink", "brown", "purple", "brown",
+var colors = [colorCnt]string{"red", "yellow", "blue", "green", "pink", "brown", "purple", "brown",
 	"white", "black", "orange"}
-var nouns = []string{"table", "chair", "house", "bbq", "desk", "car", "pony", "cookie",
+var nouns = [nounCnt]string{"table", "chair", "house", "bbq", "desk", "car", "pony", "cookie",
 	"sandwich", "burger", "pizza", "mouse", "keyboard"}
 
-func randFromSlice(arr []string) string {
-	return arr[rand.Intn(len(arr))]
+func randAdjective() string {
+	return adjectives[rand.Intn(adjectiveCnt)]
+}
+
+func randColor() string {
+	return colors[rand.Intn(colorCnt)]
+}
+
+func randNoun() string {
+	return nouns[rand.Intn(nounCnt)]
 }
 
 var nextId = 1
@@ -29,7 +41,7 @@ func BuildData(count int) []*Item {
 	for i := 0; i < count; i++ {
 		data[i] = &Item{
 			ID:    nextId,
-			Label: randFromSlice(adjectives) + " " + randFromSlice(colors) + " " + randFromSlice(nouns),
+			Label: randAdjective() + " " + randColor() + " " + randNoun(),
 		}
 		nextId++
 	}

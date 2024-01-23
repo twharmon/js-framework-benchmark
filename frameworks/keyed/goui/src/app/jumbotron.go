@@ -10,10 +10,6 @@ type JumbotronProps struct {
 	SetState func(func(*AppState) *AppState)
 }
 
-func (jp JumbotronProps) Memo() goui.Deps {
-	return goui.Deps{}
-}
-
 func button(id string, txt string, onclick *goui.Callback[func(*goui.MouseEvent)]) *goui.Node {
 	return goui.Element("div", &goui.Attributes{
 		Class: "col-sm-6 smallpad",

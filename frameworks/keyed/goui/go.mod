@@ -1,7 +1,7 @@
 module main
 
-go 1.20
+go 1.21
 
-require github.com/twharmon/goui v0.2.0
+require github.com/twharmon/goui v0.2.4
 
-replace github.com/twharmon/goui v0.2.0 => ../../../../goui
+replace github.com/twharmon/goui v0.2.4 => ../../../../goui
